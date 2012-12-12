@@ -343,7 +343,11 @@ static SDWebImageManager *instance;
 {
     SDWIRetain(downloader);
     SDWebImageOptions options = [[downloader.userInfo objectForKey:@"options"] intValue];
-
+    
+    if (options & SDWebImageRetinaImage) {
+        image = SDConvertImageToRetina(image);
+    }
+    
     // Notify all the downloadDelegates with this downloader
     for (NSInteger idx = (NSInteger)[downloaders count] - 1; idx >= 0; idx--)
     {

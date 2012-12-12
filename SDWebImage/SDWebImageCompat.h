@@ -90,3 +90,36 @@ NS_INLINE UIImage *SDScaledImageForPath(NSString *path, NSObject *imageOrData)
 
     return SDWIReturnAutoreleased(image);
 }
+
+NS_INLINE UIImage* SDConvertImageToRetina(NSObject *imageOrData) {
+    if (!imageOrData)
+    {
+        return nil;
+    }
+    
+    UIImage *image = nil;
+    if ([imageOrData isKindOfClass:[NSData class]])
+    {
+        image = [[UIImage alloc] initWithData:(NSData *)imageOrData];
+    }
+    else if ([imageOrData isKindOfClass:[UIImage class]])
+    {
+        image = SDWIReturnRetained((UIImage *)imageOrData);
+    }
+    else
+    {
+        return nil;
+    }
+    
+    if ([[UIScreen mainScreen] respondsToSelector:@selector(scale)])
+    {
+        CGFloat retinaScale = 2.0;
+        if (image.scale < retinaScale) {
+            UIImage *scaledImage = [[UIImage alloc] initWithCGImage:image.CGImage scale:retinaScale orientation:UIImageOrientationUp];
+            SDWISafeRelease(image)
+            image = scaledImage;
+        }
+    }
+    
+    return SDWIReturnAutoreleased(image);
+}

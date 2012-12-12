@@ -7,6 +7,7 @@
  */
 
 #import "SDImageCache.h"
+#import "SDWebImageManager.h"
 #import "SDWebImageDecoder.h"
 #import <CommonCrypto/CommonDigest.h>
 #import "SDWebImageDecoder.h"
@@ -208,7 +209,18 @@ static natural_t get_free_memory(void)
     NSString *key = [arguments objectForKey:@"key"];
     NSMutableDictionary *mutableArguments = SDWIReturnAutoreleased([arguments mutableCopy]);
 
-    UIImage *image = SDScaledImageForPath(key, [NSData dataWithContentsOfFile:[self cachePathForKey:key]]);
+    NSDictionary *userInfo = [arguments objectForKey:@"userInfo"];
+    SDWebImageOptions options = [[userInfo objectForKey:@"options"] intValue];
+    
+    UIImage *image =
+    nil;
+    if (options & SDWebImageRetinaImage) {
+        image = SDConvertImageToRetina([NSData dataWithContentsOfFile:[self cachePathForKey:key]]);
+    }
+    else {
+        image =
+        SDScaledImageForPath(key, [NSData dataWithContentsOfFile:[self cachePathForKey:key]]);
+    }
 
     if (image)
     {
