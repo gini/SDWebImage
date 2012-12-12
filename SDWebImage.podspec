@@ -1,12 +1,12 @@
 Pod::Spec.new do |s|
   s.name     = 'SDWebImage'
-  s.version  = '2.7'
+  s.version  = '2.7.1'
   s.platform = :ios
   s.license  = 'MIT'
   s.summary  = 'Asynchronous image downloader with cache support with an UIImageView category.'
   s.homepage = 'https://github.com/rs/SDWebImage'
   s.author   = { 'Olivier Poitrey' => 'rs@dailymotion.com' }
-  s.source   = { :git => 'https://github.com/rs/SDWebImage.git', :tag => '2.7' }
+  s.source   = { :git => 'https://github.com/smarchive/SDWebImage.git', :tag => '2.7.1' }
 
   s.description  = 'This library provides a category for UIImageVIew with support for remote '      \
                    'images coming from the web. It provides an UIImageView category adding web '    \
