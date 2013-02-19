@@ -110,7 +110,7 @@ static SDWebImageDecoder *sharedInstance;
                                                  // NOTE: here we remove the alpha channel for performance. Most of the time, images loaded
                                                  //       from the network are jpeg with no alpha channel. As a TODO, finding a way to detect
                                                  //       if alpha channel is necessary would be nice.
-                                                 kCGImageAlphaFirst | kCGBitmapByteOrder32Little
+                                                 kCGImageAlphaPremultipliedLast
 //                                                 kCGImageAlphaNoneSkipLast | kCGBitmapByteOrder32Little
                                                  );
     CGColorSpaceRelease(colorSpace);
